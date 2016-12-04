@@ -46,9 +46,9 @@
 
 #include <SoftwareSerial.h>
 //should connect to TX of the Serial MP3 Player module
-#define ARDUINO_RX 5
+#define ARDUINO_RX 7 // yellow cable
 //connect to RX of the module
-#define ARDUINO_TX 6
+#define ARDUINO_TX 13 // geen cable
 
 
 SoftwareSerial myMP3(ARDUINO_RX, ARDUINO_TX);
