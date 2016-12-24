@@ -45,10 +45,10 @@
 // Uncomment SoftwareSerial for Arduino Uno or Nano.
 
 #include <SoftwareSerial.h>
-//should connect to RX of the Serial MP3 Player module
-#define ARDUINO_RX 2 //blue
-//connect to TX of the module
-#define ARDUINO_TX 4 //yellow
+//should connect to TX of the Serial MP3 Player module
+#define ARDUINO_RX 11 //blue
+//connect to RX of the module
+#define ARDUINO_TX 12 //yellow
 
 SoftwareSerial myMP3(ARDUINO_RX, ARDUINO_TX);
 
@@ -58,7 +58,8 @@ int iansbuf = 0;                 // Index for answer buffer.
 String mp3answer;                // Answer from the MP3.
 int foldernr = 0;                      // Current Folder
 
-static int8_t pre_vol, volume = 0x0f; // Volume. 0-30 DEC values. 0x0f = 15.
+static int8_t pre_vol, volume = 0x0f; // Volume. 0-30 DEC values. 0x0f = 15. volume is the current value
+static int8_t max_vol = 0x14; // Set max Volume. 20 DEC values. 0x14 = 20.
 
 boolean playing = false;    // Sending 'p' the module switch to Play to Pause or viceversa.
 
@@ -76,6 +77,7 @@ void sendMP3Command(char c) {
   if (isDigit(c)) {
     Serial.println("Play mp3 in Folder ");
     Serial.println(c);
+    playing = true;
     if (foldernr == int(c) - 48) {
       //Play next Song
       Serial.println("Next");
@@ -113,23 +115,27 @@ void sendMP3Command(char c) {
       case 'n':
         Serial.println("Next");
         sendCommand(CMD_NEXT_SONG);
-        //          sendCommand(CMD_PLAYING_N, 0x0000); // ask for the number of file is playing
         break;
 
       case 'b':
         Serial.println("Previous");
         sendCommand(CMD_PREV_SONG);
-        //          sendCommand(CMD_PLAYING_N, 0x0000); // ask for the number of file is playing
         break;
 
       case 'u':
-        Serial.println("Volume Up");
-        sendCommand(CMD_VOLUME_UP);
+        if (volume < max_vol) {
+          Serial.println("Volume Up" + volume);
+          sendCommand(CMD_VOLUME_UP);
+          volume+1;
+        }else{
+          Serial.println("Max Volume");
+        }
         break;
 
       case 'd':
-        Serial.println("Volume Down");
+        Serial.println("Volume Down" + volume);
         sendCommand(CMD_VOLUME_DOWN);
+        volume-1;
         break;
     }
   }
@@ -166,8 +172,6 @@ String decodeMP3Answer() {
 
       case 0x00:
         decodedMP3Answer += " -> Data recived correctly. ";
-        // next Song
-        //   sendCommand(CMD_NEXT_SONG);
         break;
     }
   }
@@ -187,17 +191,6 @@ String decodeMP3Answer() {
 void sendCommand(int8_t command, int8_t dath, int8_t datl)
 {
   delay(20);
-  /*ori:
-    Send_buf[0] = 0x7e;   //
-    Send_buf[1] = 0xff;   //
-    Send_buf[2] = 0x02;   // Len
-    Send_buf[3] = command;//
-    Send_buf[4] = 0x01;   // 0x00 NO, 0x01 feedback
-    Send_buf[5] = (int8_t)(dat >> 8);  //datah
-    Send_buf[6] = (int8_t)(dat);       //datal
-    Send_buf[7] = 0xef;   //
-  */
-
   Send_buf[0] = 0x7e;   // Start
   Send_buf[1] = 0x04;   // Len
   Send_buf[2] = command;   // command
