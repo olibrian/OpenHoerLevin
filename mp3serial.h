@@ -124,18 +124,24 @@ void sendMP3Command(char c) {
 
       case 'u':
         if (volume < max_vol) {
-          Serial.println("Volume Up" + volume);
+          Serial.print("Volume Up");
+          Serial.println(volume);
           sendCommand(CMD_VOLUME_UP);
-          volume+1;
-        }else{
+          volume++;
+        } else {
           Serial.println("Max Volume");
         }
         break;
 
       case 'd':
-        Serial.println("Volume Down" + volume);
-        sendCommand(CMD_VOLUME_DOWN);
-        volume-1;
+        if (volume > 0) {
+          Serial.print("Volume Down");
+          Serial.println(volume);
+          sendCommand(CMD_VOLUME_DOWN);
+          volume--;
+        } else {
+          Serial.println("Min Volume");
+        }
         break;
     }
   }
