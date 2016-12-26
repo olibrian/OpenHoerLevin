@@ -162,18 +162,19 @@ String decodeMP3Answer() {
   // if iansbuf is zero is because it was reset to it when 0xEF (end) was readed.
   if (iansbuf == 0)
   {
-    switch (ansbuf[3])
+    switch (ansbuf[2])
     {
       case 0x3F:
         decodedMP3Answer += " -> Memory card inserted.";
         break;
 
-      case 0x3D:
-        decodedMP3Answer += " -> Completed play num " + String(ansbuf[6], DEC);
+      case 0x3d:
+        decodedMP3Answer += " -> Completed play num " + String(ansbuf[5], DEC);
+        sendCommand(CMD_NEXT_SONG);  
         break;
 
       case 0x4C:
-        decodedMP3Answer += " -> Playing: " + String(ansbuf[6], DEC);
+        decodedMP3Answer += " -> Playing: " + String(ansbuf[5], DEC);
         break;
 
       case 0x00:
@@ -304,3 +305,6 @@ String sanswer(void)
 
   return mp3answer;
 }
+
+
+
