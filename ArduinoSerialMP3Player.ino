@@ -12,7 +12,6 @@
 // Serial MP3 Player Catalex (YX5300 chip)
 #define Serial3    // Connect the MP3 Serial Player to the Arduino MEGA Serial3 (14 TX3 -> RX, 15 RX3 -> TX)
 #define SWITCH 8 // mp3addon Switch
-#define SENSOR A1 // Poti for volume control
 #define DEBUG false // Debug function
 
 // ** Keypad
@@ -23,7 +22,7 @@ char keys[ROWS][COLS] = {
   {'1', '2', '3', 'a'},
   {'4', '5', '6', 'b'},
   {'7', '8', '9', 'c'},
-  {'u', 'p', 'd', 'd'}
+  {'d', 'p', 'u', 'd'}
 };
 // Connect keypad ROW0, ROW1, ROW2 and ROW3 to these Arduino pins.
 byte rowPins[ROWS] = { 9, 6, 4, 2 };
