@@ -15,6 +15,8 @@
 
 #define CMD_SNG_CYCL_PLAY 0X33  // All Songs Cycle Play.
 #define CMD_SEL_DEV       0X35 // Select Device
+#define CMD_FORWARD       0X0A // Fast forward
+#define CMD_REWIND        0X0B // Fast rewind
 #define CMD_SLEEP_MODE    0X0A //?
 #define CMD_WAKE_UP       0X0B //?
 #define CMD_RESET         0X0C //?
@@ -95,6 +97,8 @@ void sendMP3Command(char c) {
         Serial.println(" p > Play / Pause ");
         Serial.println(" n > Next");
         Serial.println(" b > Previous");
+        Serial.println(" f > Fast Forward");
+        Serial.println(" r > Fast Rewind");
         Serial.println(" u > Volume UP");
         Serial.println(" d > Volume DOWN");
         Serial.println(" 1-9 > Play mp3 in Folder 1 or up to 9");
@@ -115,6 +119,16 @@ void sendMP3Command(char c) {
       case 'n':
         Serial.println("Next");
         sendCommand(CMD_NEXT_SONG);
+        break;
+
+      case 'f':
+        Serial.println("Forward");
+        sendCommand(CMD_FORWARD);
+        break;
+
+      case 'r':
+        Serial.println("Rewind");
+        sendCommand(CMD_REWIND);
         break;
 
       case 'b':
