@@ -12,7 +12,8 @@
 // Serial MP3 Player Catalex (YX5300 chip)
 #define Serial3    // Connect the MP3 Serial Player to the Arduino MEGA Serial3 (14 TX3 -> RX, 15 RX3 -> TX)
 #define SWITCH 8 // mp3addon Switch
-#define DEBUG false // Debug function
+#define DEBUG false // Debug 
+#define ledPin 9 // Status Led
 
 // ** Keypad
 const byte ROWS = 4; // Four rows
@@ -39,12 +40,14 @@ Keypad kpd = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 void setup()
 {
+  pinMode(ledPin, OUTPUT);      // sets the digital pin as output
   Serial.begin(9600);
   myMP3.begin(9600);
   delay(500);
   sendCommand(CMD_SEL_DEV, DEV_TF);  //Select Device
   delay(200);
   sendCommand(CMD_SET_VOLUME, 0x0f); //Set Standard volume to 15
+  digitalWrite(ledPin, HIGH);   // sets the LED on
 }
 
 void loop()
