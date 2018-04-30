@@ -9,4 +9,11 @@ Some cheap hardware from china:
 * Wire, switches, ..
 * Wood
 
-Attention: Most hardware came without any documentation, spec can be found in the internet but similar products arn't compatible. Of corse the project is also possible with other Arduino boards and moduls but some specs could be different. The IoT WIFI Nano Board came from another project and isn't the cheepest board, but with the Wifi it is open for next freeking feature - we will see.
+Attention: Most hardware came without any documentation. I will find the spec on the internet but similar products arn't compatible. Of corse the project is also possible with other Arduino boards and moduls but some specs could be different. The IoT WIFI Nano Board came from another project and isn't the cheepest board, but with the Wifi it is open for next freeking feature - we will see.
+
+Looking for more?
+Thomas also made his own "Hörbert":
+http://chrigas.blogspot.ch/2014/10/arduino-mp3-player-1-auswahl-der.html
+
+Based on a mp3 kit:
+https://www.elv.ch/mp3-sound-modul-msm-2-komplettbausatz.html
