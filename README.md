@@ -9,7 +9,7 @@ Some cheap hardware from china:
 * Wire, switches, ..
 * Wood
 
-Attention: Most hardware came without any documentation. I will find the spec on the internet but similar products arn't compatible. Of corse the project is also possible with other Arduino boards and moduls but some specs could be different. The IoT WIFI Nano Board came from another project and isn't the cheepest board, but with the Wifi it is open for next freeking feature - we will see.
+Attention: Most hardware shipped without any technical documentation. I could find specs on the internet but similar products aren't compatible. Of course the project is also possible with other Arduino boards and modules but some specs could be different. The IoT WIFI Nano Board came from another project and isn't the cheapest board, but with the Wifi it is open for next freaking feature - we will see.
 
 Looking for more?
 Thomas also made his own "Hörbert":
